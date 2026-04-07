@@ -170,7 +170,6 @@ local plugins = {
       require('cmp').setup {
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'buffer' },
         },
       }
     end,
@@ -242,7 +241,13 @@ local plugins = {
   {
     src = gh 'neovim/nvim-lspconfig',
     setup = function()
-      vim.lsp.enable { 'lua_ls', 'rust_analyzer', 'clangd' }
+      local lsp_list = { 'lua_ls', 'rust_analyzer', 'clangd' }
+      for _, lsp in ipairs(lsp_list) do
+        vim.lsp.config(lsp, {
+          capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        })
+      end
+      vim.lsp.enable(lsp_list)
     end,
   },
   {
@@ -489,18 +494,18 @@ local plugins = {
       vim.keymap.set('n', '<leader>e', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end, { desc = 'Show harpoon marks' })
-      vim.keymap.set('n', '1', function()
+      vim.keymap.set('n', '<leader>1', function()
         harpoon:list():select(1)
-      end)
-      vim.keymap.set('n', '2', function()
+      end, { desc = 'Harpoon 1' })
+      vim.keymap.set('n', '<leader>2', function()
         harpoon:list():select(2)
-      end)
-      vim.keymap.set('n', '3', function()
+      end, { desc = 'Harpoon 2' })
+      vim.keymap.set('n', '<leader>3', function()
         harpoon:list():select(3)
-      end)
-      vim.keymap.set('n', '4', function()
+      end, { desc = 'Harpoon 3' })
+      vim.keymap.set('n', '<leader>4', function()
         harpoon:list():select(4)
-      end)
+      end, { desc = 'Harpoon 4' })
     end,
   },
 }

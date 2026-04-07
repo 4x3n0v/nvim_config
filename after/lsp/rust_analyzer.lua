@@ -3,9 +3,9 @@ return {
     ['rust-analyzer'] = {
       imports = {
         granularity = {
-          group = 'module',
+          enforce = true,
+          group = 'crate',
         },
-        prefix = 'self',
       },
       cargo = {
         buildScripts = {

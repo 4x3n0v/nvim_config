@@ -319,13 +319,22 @@ local plugins = {
     setup = function() end,
   },
   {
+    src = gh 'rebelot/kanagawa.nvim',
+    setup = function()
+      require('kanagawa').setup {
+        commentStyle = { italic = false },
+        keywordStyle = { italic = false },
+      }
+    end,
+  },
+  {
     src = gh 'webhooked/kanso.nvim',
     setup = function()
       require('kanso').setup {
         bold = true,
         italics = false,
+        compile = true,
       }
-      vim.cmd 'colorscheme kanso'
     end,
   },
   {
@@ -524,6 +533,8 @@ end, plugins))
 for _, plugin in ipairs(plugins) do
   _ = plugin.setup and plugin.setup()
 end
+
+vim.cmd 'colorscheme kanso'
 
 -- Enable some additional cool things when lsp is attached
 vim.api.nvim_create_autocmd('LspAttach', {

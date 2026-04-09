@@ -328,6 +328,9 @@ local plugins = {
     end,
   },
   {
+    src = gh 'vague-theme/vague.nvim',
+  },
+  {
     src = gh 'webhooked/kanso.nvim',
     setup = function()
       require('kanso').setup {

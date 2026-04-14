@@ -328,7 +328,18 @@ local plugins = {
     end,
   },
   {
-    src = gh 'vague-theme/vague.nvim',
+    src = gh 'rose-pine/neovim',
+    name = 'rose-pine',
+    setup = function()
+      require('rose-pine').setup {
+        styles = {
+          bold = true,
+          italic = false,
+          transparency = true,
+        },
+      }
+      vim.cmd 'colorscheme rose-pine'
+    end,
   },
   {
     src = gh 'webhooked/kanso.nvim',
@@ -536,8 +547,6 @@ end, plugins))
 for _, plugin in ipairs(plugins) do
   _ = plugin.setup and plugin.setup()
 end
-
-vim.cmd 'colorscheme kanso'
 
 -- Enable some additional cool things when lsp is attached
 vim.api.nvim_create_autocmd('LspAttach', {
